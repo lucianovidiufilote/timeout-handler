@@ -15,5 +15,6 @@
         "psr-4": {
             "lucianovidiufilote\\TimeoutHandler\\": "src/"
         }
-    }
+    },
+    "version": "1.0.0"
 }
