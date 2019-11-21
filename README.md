@@ -13,8 +13,6 @@ composer require lucianovidiufilote/timeout-handler
 Usage
 -----
 
-If you need a logger, you can use the interface like this:
-
 ```php
 TBD
 ```
