@@ -27,6 +27,11 @@ class TimeoutHelper
     /** @var float|null $exceptionTime */
     private $exceptionTime = null;
 
+    /** @var string $customString */
+    private $customString = '';
+
+    private static $instance = null;
+
     public function __construct()
     {
         declare(ticks=1);
@@ -34,10 +39,17 @@ class TimeoutHelper
 
     /**
      * On call, initialize start time, timeout time and the tick function
-     * @param $timeout
+     * @param int $timeout
+     * @param string $customString
+     * @param bool $overwriteIni
      */
-    public function start($timeout)
+    public function start($timeout = 7200, $customString = '[Timeout Helper]', $overwriteIni = true)
     {
+        if ($overwriteIni) {
+            set_time_limit(0);
+            ini_set('max_execution_time', 0);
+        }
+        $this->customString = $customString;
         $this->startTime = microtime(true);
         $this->timeout = $timeout;
         register_tick_function(array($this, 'tick'), true);
@@ -63,7 +75,7 @@ class TimeoutHelper
         $time = microtime(true);
         if (($time - $this->startTime) > $this->timeout) {
             $this->exceptionTime = $time;
-            throw new TimeoutException("[TimeoutHelper] Timeout of " . $this->timeout . " seconds exceeded!");
+            throw new TimeoutException($this->customString . " Timeout of " . $this->timeout . " seconds exceeded!");
         }
     }
 
@@ -89,5 +101,13 @@ class TimeoutHelper
     public function getExceptionTime()
     {
         return $this->exceptionTime;
+    }
+
+    public static function getInstance()
+    {
+        if (self::$instance == null) {
+            self::$instance = new TimeoutHelper();
+        }
+        return self::$instance;
     }
 }
