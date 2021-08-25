@@ -1,6 +1,7 @@
 {
     "name": "lucianovidiufilote/timeout-handler",
     "description": "PHP timeout handler",
+    "type": "library",
     "authors": [
         {
             "name": "Lucian Filote",
