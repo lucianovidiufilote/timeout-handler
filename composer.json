@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "lucianovidiufilote\\TimeoutHandler\\": "src/"
+            "LucianOvidiuFilote\\TimeoutHandler\\": "src/"
         }
     },
     "version": "1.0.0"

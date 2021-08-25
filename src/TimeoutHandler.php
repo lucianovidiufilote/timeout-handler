@@ -13,10 +13,9 @@ use LucianOvidiuFilote\TimeoutHandler\Exceptions\TimeoutException;
 
 /**
  * Helper class used to limit execution time and catch exceeding timeouts
- * Class TimeoutHelper
- * @package AppBundle\Helpers
+ * Class TimeoutHandler
  */
-class TimeoutHelper
+class TimeoutHandler
 {
     /** @var float|null $start_time */
     private $startTime = null;
@@ -43,7 +42,7 @@ class TimeoutHelper
      * @param string $customString
      * @param bool $overwriteIni
      */
-    public function start($timeout = 7200, $customString = '[Timeout Helper]', $overwriteIni = true)
+    public function start($timeout = 7200, $customString = '[Timeout Handler]', $overwriteIni = true)
     {
         if ($overwriteIni) {
             set_time_limit(0);
@@ -106,7 +105,7 @@ class TimeoutHelper
     public static function getInstance()
     {
         if (self::$instance == null) {
-            self::$instance = new TimeoutHelper();
+            self::$instance = new TimeoutHandler();
         }
         return self::$instance;
     }
